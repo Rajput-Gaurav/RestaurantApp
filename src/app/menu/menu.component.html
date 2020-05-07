@@ -1,0 +1,62 @@
+<!-- we will Use Flex-Layout -->
+<!-- fxLayout or fxLayoutGap it is the property of flex-layout -->
+<div class="container" fxLayout="column" fxLayoutGap="10px">
+
+  <!-- create another div -->
+  <!-- create a title for our Menu: -->
+  <div fxFlex>
+    <div>
+      <h3>Menu</h3>
+      <hr>
+    </div>
+  </div>
+
+  <div fxFlex>
+    <!-- Use Angular Material Layout -->
+    <!-- fxFlex is a property of flex-layout -->
+    <mat-grid-list cols="2" rowHeight="200px">
+
+      <mat-grid-tile *ngFor="let dish of dishes" (click) = "onSelect(dish)">
+
+        <!-- matListAvatar cretae all the images in round avatar type img: -->
+        <!-- <img matListAvatar src="{{dish.image}}" alt="{{dish.name}}"> -->
+            <img height="200px" src="{{dish.image}}" alt="{{dish.name}}">
+
+            <mat-grid-tile-footer>
+
+              <!-- use pipe too trasform text in uppercase: -->
+              <h1>{{dish.name | uppercase}}</h1>
+              <!-- matLine for the show names and descriptions in lines:-->
+              <!-- <p matLine>
+                <span>{{dish.description}}</span>
+              </p> -->
+
+            </mat-grid-tile-footer>
+
+
+      </mat-grid-tile>
+    </mat-grid-list>
+
+  </div>
+
+    <!-- <div fxFlex *ngIf="selectedDish">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <h3>{{selectedDish.name | uppercase}}</h3>
+          </mat-card-title>
+        </mat-card-header>
+        <img mat-card-image src={{selectedDish.image}} alt={{selectedDish.name}}>
+        <mat-card-content>
+          <p>{{selectedDish.description}}</p>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <button mat-button>Like</button>
+          <button mat-button>Share</button>
+        </mat-card-actions>
+      </mat-card>
+    </div> -->
+</div>
+
+<app-dishdetail [dish] = "selectedDish"></app-dishdetail>
