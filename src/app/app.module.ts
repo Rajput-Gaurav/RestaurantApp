@@ -26,6 +26,7 @@ import { ContactComponent } from './contact/contact.component';
 
 //import services too use:
 import { DishService} from './services/dish.service';
+import { PromotionService} from './services/promotion.service';
 
 // add approutingmodule:
 import { AppRoutingModule} from './app-routing/app-routing.module';
@@ -61,7 +62,8 @@ import { AppRoutingModule} from './app-routing/app-routing.module';
 
           //import service in providers too available for every components:
   providers: [
-    DishService
+    DishService,
+    PromotionService
   ],
 
   bootstrap: [AppComponent]
