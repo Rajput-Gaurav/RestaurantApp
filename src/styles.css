@@ -21,3 +21,8 @@ body
     margin: 20px;
     display: flex;
 }
+
+/* apply the css too the flex-spacer in header.component.html file: */
+.flex-spacer {
+    flex: 1 1 auto;
+  }

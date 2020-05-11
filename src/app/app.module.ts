@@ -10,6 +10,7 @@ import { MatListModule} from '@angular/material/list';
 import { MatGridListModule} from '@angular/material/grid-list';
 import { MatCardModule} from '@angular/material/card';
 import { MatButtonModule} from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
 //import hammerjs.
 import 'hammerjs';
@@ -31,6 +32,7 @@ import { LeaderService } from './services/leader.service';
 
 // add approutingmodule:
 import { AppRoutingModule} from './app-routing/app-routing.module';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { AppRoutingModule} from './app-routing/app-routing.module';
     FooterComponent,
     HomeComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,8 @@ import { AppRoutingModule} from './app-routing/app-routing.module';
     MatGridListModule,
     MatCardModule,
     MatButtonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatDialogModule
   ],
   
   exports:[MatToolbarModule,
@@ -67,6 +71,11 @@ import { AppRoutingModule} from './app-routing/app-routing.module';
     PromotionService,
     LeaderService
   ],
+
+  // To make this component be opened from another component, you need to declare this as an EntryComponent in the AppModule:
+  entryComponents: [
+                      LoginComponent
+                   ],
 
   bootstrap: [AppComponent]
 })
