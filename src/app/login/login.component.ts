@@ -6,13 +6,26 @@ import {MatDialog, MatDialogRef} from '@angular/material';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  // add scss file and remove css file:
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  // create a object of user too take the value of input fields:
+  user = {username: '', password: '', remember: false};
+
+  // in the constructor inject the DialogRef and LoginComponent depend in MatDialogRef:
+  constructor(public dialogRef: MatDialogRef<LoginComponent>) { }
 
   ngOnInit() {
   }
 
+  // call onSubmit method:
+  onSubmit() {
+    console.log('User: ', this.user);
+
+    // this is used too when form is submit then dialog is closed:
+    this.dialogRef.close();
+
+}
 }
