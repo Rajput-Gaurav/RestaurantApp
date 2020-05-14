@@ -30,7 +30,11 @@ import { LoginComponent } from './login/login.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 //import services too use:
 import { DishService} from './services/dish.service';
@@ -67,7 +71,11 @@ import { AppRoutingModule} from './app-routing/app-routing.module';
     MatFormFieldModule,
     MatInputModule,
     MatCheckboxModule,
+    MatSelectModule,
+    MatSlideToggleModule,
+
     FormsModule,
+    ReactiveFormsModule,
   ],
   
   exports:[MatToolbarModule,
