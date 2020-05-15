@@ -8,17 +8,19 @@ export class LeaderService {
 
   constructor() { }
 
-  getLeaders(): Leader[] {
-    return LEADERS;
+  // design your services to return promises and resolve them when the results are available:
+
+  getLeaders(): Promise<Leader[]> {
+    return Promise.resolve(LEADERS);
   }
 
-  getLeader(id: string):Leader{
-    return LEADERS.filter((leader)=>(leader.id === id))[0];
+  getLeader(id: string): Promise<Leader>{
+    return Promise.resolve(LEADERS.filter((leader)=>(leader.id === id))[0]);
   }
 
   // use too get the FeaturedLeader:
-  getFeaturedLeader(): Leader {
-    return LEADERS.filter((Leader) => Leader.featured)[0];
+  getFeaturedLeader(): Promise<Leader> {
+    return Promise.resolve(LEADERS.filter((Leader) => Leader.featured)[0]);
   }
 
 }
