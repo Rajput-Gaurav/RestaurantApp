@@ -28,5 +28,9 @@ export class DishService {
     return of(DISHES.filter((dish) => dish.featured)[0]).pipe(delay(2000));
   
 }
+// adding new method on a service for get the all of dishes id:
+  getDishIds(): Observable <string [] | any>{
+  return of(DISHES.map(dish => dish.id));
+}
 
 }
