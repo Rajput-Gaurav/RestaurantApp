@@ -11,7 +11,9 @@
     </div>
   </div>
 
-  <div fxFlex>
+  <!-- add *ngIf=dishes: if first div delay in loading then show second div,
+       and when the first div is load then show first div:-->
+  <div fxFlex *ngIf="dishes">
     <!-- Use Angular Material Layout -->
     <!-- fxFlex is a property of flex-layout -->
     <mat-grid-list cols="2" rowHeight="200px">
@@ -30,6 +32,13 @@
       </mat-grid-tile>
     </mat-grid-list>
 
+  </div>
+
+  <!-- add [hidden]="dishes": if first div delay in loading then show second div,
+       and when the first div is load then show first div:-->
+
+  <div [hidden]="dishes">
+    <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
   </div>
 
 </div>

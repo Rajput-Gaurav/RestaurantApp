@@ -3,24 +3,29 @@ import { Injectable } from '@angular/core';
 import { Leader } from '../shared/leader';
 import { LEADERS } from '../shared/leaders';
 
+// import of and delay too use observables:
+import { of } from 'rxjs/observable/of';
+import { delay } from 'rxjs/operators';
+import { Observable } from 'rxjs/Observable';
+
 @Injectable()
 export class LeaderService {
 
   constructor() { }
 
-  // design your services to return promises and resolve them when the results are available:
+  
+  // However, we would rather directly operate with observables.
+  getLeaders(): Observable<Leader[]> {
+    return of(LEADERS).pipe(delay(2000));
+}
 
-  getLeaders(): Promise<Leader[]> {
-    return Promise.resolve(LEADERS);
-  }
-
-  getLeader(id: string): Promise<Leader>{
-    return Promise.resolve(LEADERS.filter((leader)=>(leader.id === id))[0]);
-  }
+  getLeader(id: string): Observable<Leader>{
+    return of(LEADERS.filter((leader)=>(leader.id === id))[0]).pipe(delay(2000));
+}
 
   // use too get the FeaturedLeader:
-  getFeaturedLeader(): Promise<Leader> {
-    return Promise.resolve(LEADERS.filter((Leader) => Leader.featured)[0]);
-  }
+  getFeaturedLeader(): Observable<Leader> {
+    return of(LEADERS.filter((Leader) => Leader.featured)[0]).pipe(delay(2000));
+}
 
 }

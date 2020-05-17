@@ -19,7 +19,7 @@ export class AboutComponent implements OnInit {
     // use this method too get the data through promises:
     
      this.leaderService.getLeaders()
-    .then(leader => this.leader = leader);
+    .subscribe(leader => this.leader = leader);
   }
 
 }

@@ -61,7 +61,7 @@
     <h2>Corporate Leadership</h2>
     <!-- <p>Display the details of the corporate leaders here</p> -->
     <mat-card>
-    <mat-list fxFlex="100">
+    <mat-list fxFlex="100" *ngIf="leader">
       <mat-list-item *ngFor="let lead of leader">
         <img matListAvatar src="{{lead.image}}" alt="{{lead.name}}">
         <h1 matLine>{{lead.name}}</h1>
@@ -72,5 +72,13 @@
       </mat-list-item>
     </mat-list>
   </mat-card>
+  
+  <!-- add [hidden]="leader": if first div delay in loading then show second div,
+       and when the first div is load then show first div:-->
+
+       <div [hidden]="leader">
+        <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+      </div>
+
   </div>
 </div>

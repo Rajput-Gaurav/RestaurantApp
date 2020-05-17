@@ -4,22 +4,29 @@ import { Dish} from '../shared/dish';
 //import dishes and use as a service and export dishes as a service:
 import { DISHES} from '../shared/dishes';
 
+// import of and delay too use observables:
+// import { of } from 'rxjs/observable/of';
+import { of } from 'rxjs/observable/of';
+import { delay } from 'rxjs/operators';
+import { Observable } from 'rxjs/Observable';
+
 @Injectable()
 export class DishService {
 
   constructor() { }
 
-  // design your services to return promises and resolve them when the results are available:
-  getDishes(): Promise<Dish[]> {
-    return Promise.resolve(DISHES);
+  // However, we would rather directly operate with observables.
+  getDishes(): Observable<Dish[]> {
+    return of(DISHES).pipe(delay(2000));
   }
 
-  getDish(id: string): Promise<Dish> {
-    return Promise.resolve(DISHES.filter((dish) => (dish.id === id))[0]);
-  }
+  getDish(id: string): Observable<Dish> {
+    return of(DISHES.filter((dish) => (dish.id === id))[0]).pipe(delay(2000));
+}
 
-  getFeaturedDish(): Promise<Dish> {
-    return Promise.resolve(DISHES.filter((dish) => dish.featured)[0]);
-  }
+  getFeaturedDish(): Observable<Dish> {
+    return of(DISHES.filter((dish) => dish.featured)[0]).pipe(delay(2000));
+  
+}
 
 }
