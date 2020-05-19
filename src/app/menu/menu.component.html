@@ -20,7 +20,8 @@
 
       <mat-grid-tile *ngFor="let dish of dishes" [routerLink]="['/dishdetail', dish.id]">
 
-            <img height="200px" src="{{dish.image}}" alt="{{dish.name}}">
+            <!-- use BaseURL too get the image: -->
+            <img height="200px" src="{{BaseURL + dish.image}}" alt="{{dish.name}}">
 
             <mat-grid-tile-footer>
 
@@ -42,6 +43,3 @@
   </div>
 
 </div>
-
-<!-- remove the app-dishdetail router-outlet -->
-<!-- <app-dishdetail [dish] = "selectedDish"></app-dishdetail> -->

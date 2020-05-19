@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 
 //import the Dish class which we are created inside shared folder:
 import { Dish } from '../shared/dish';
-// import { DISHES } from '../shared/dishes';
 
 //use a service: import the services
 import { DishService} from '../services/dish.service';
+// import { baseURL } from '../shared/baseurl';
 
   
 @Component({
@@ -15,27 +15,19 @@ import { DishService} from '../services/dish.service';
 })
 export class MenuComponent implements OnInit {
 
-  //create a variable for assigning Dish:
-  // dishes: Dish[] = DISHES;
-
   dishes: Dish[];
 
-  selectedDish: Dish;
-
   //inject the services in constructor:
-  constructor(private dishService: DishService) { }
+  constructor(private dishService: DishService,
+    @Inject ('BaseURL') private BaseURL) { }
 
-  // constructor() { }
+
 
   ngOnInit() {
     //use for fetch the services:
     // use this method too get the data through promises:
     this.dishService.getDishes()
     .subscribe(dishes => this.dishes = dishes);
-  }
-
-  onSelect(dish: Dish) {
-    this.selectedDish = dish;
   }
 
 }

@@ -33,6 +33,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatSliderModule} from '@angular/material/slider';
 
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -44,6 +45,12 @@ import { LeaderService } from './services/leader.service';
 
 // add approutingmodule:
 import { AppRoutingModule} from './app-routing/app-routing.module';
+
+// import HttpClientModule:
+import { HttpClientModule } from '@angular/common/http';
+
+// import baseUrl:
+import { baseURL } from './shared/baseurl';
 
 
 @NgModule({
@@ -75,9 +82,12 @@ import { AppRoutingModule} from './app-routing/app-routing.module';
     MatSelectModule,
     MatSlideToggleModule,
     MatProgressSpinnerModule,
+    MatSliderModule,
 
     FormsModule,
     ReactiveFormsModule,
+
+    HttpClientModule,
   ],
   
   exports:[MatToolbarModule,
@@ -90,7 +100,8 @@ import { AppRoutingModule} from './app-routing/app-routing.module';
   providers: [
     DishService,
     PromotionService,
-    LeaderService
+    LeaderService,
+    {provide: 'BaseURL', useValue: baseURL}
   ],
 
   // To make this component be opened from another component, you need to declare this as an EntryComponent in the AppModule:

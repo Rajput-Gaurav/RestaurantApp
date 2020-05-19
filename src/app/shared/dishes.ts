@@ -1,4 +1,5 @@
 import { Dish } from './dish';
+import { Review } from './review';
 
 export const DISHES: Dish[] = [
     {
@@ -16,7 +17,8 @@ export const DISHES: Dish[] = [
                 rating: 5,
                 comment: 'Imagine all the eatables, living in conFusion!',
                 author: 'John Lemon',
-                date: '2012-10-16T17:57:28.556094Z'
+                date: '2012-10-16T17:57:28.556094Z',
+                
             },
             {
                 rating: 4,
@@ -43,6 +45,7 @@ export const DISHES: Dish[] = [
                 date: '2011-12-02T17:57:28.556094Z'
             }
         ]
+        
     },
     {
         id: '1',
