@@ -42,6 +42,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DishService} from './services/dish.service';
 import { PromotionService} from './services/promotion.service';
 import { LeaderService } from './services/leader.service';
+import { ProcessHttpmsgService } from './services/process-httpmsg.service';
 
 // add approutingmodule:
 import { AppRoutingModule} from './app-routing/app-routing.module';
@@ -101,6 +102,7 @@ import { baseURL } from './shared/baseurl';
     DishService,
     PromotionService,
     LeaderService,
+    ProcessHttpmsgService,
     {provide: 'BaseURL', useValue: baseURL}
   ],
 

@@ -82,8 +82,13 @@
   <!-- add [hidden]="dish": if first div delay in loading then show second div,
        and when the first div is load then show first div:-->
 
-       <div [hidden]="dish">
+       <div [hidden]="dish || errMess">
         <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+      </div>
+      <div fxFlex *ngIf="errMess">
+        <h2>Error</h2>
+        <h4>{{errMess}}</h4>
+
       </div>
 
     <!-- <p>Display the list of comments here</p> -->

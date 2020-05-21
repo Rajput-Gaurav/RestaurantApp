@@ -16,6 +16,7 @@ import { DishService} from '../services/dish.service';
 export class MenuComponent implements OnInit {
 
   dishes: Dish[];
+  errMess: string;
 
   //inject the services in constructor:
   constructor(private dishService: DishService,
@@ -27,7 +28,8 @@ export class MenuComponent implements OnInit {
     //use for fetch the services:
     // use this method too get the data through promises:
     this.dishService.getDishes()
-    .subscribe(dishes => this.dishes = dishes);
+    .subscribe(dishes => this.dishes = dishes,
+        errmess => this.errMess =<any>errmess);
   }
 
 }

@@ -30,6 +30,8 @@ export class DishdetailComponent implements OnInit {
   prev: string;
   next: string;
 
+  errMess: string;
+
    // add objects for formError:
    formErrors = {
     'name': '',
@@ -60,8 +62,10 @@ export class DishdetailComponent implements OnInit {
 
   ngOnInit() {
     // method for when the dishes are changed then show them:
+    // and get all the dishes in dishdetaile component:
     this.route.params.pipe(switchMap((params: Params) => this.dishservice.getDish(params['id'])))
-    .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); });
+    .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); },
+      errmess => this.errMess =<any>errmess);
 
     // use this method too get the id of dishes:
     this.dishservice.getDishIds()
