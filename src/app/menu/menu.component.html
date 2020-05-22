@@ -18,7 +18,7 @@
     <!-- fxFlex is a property of flex-layout -->
     <mat-grid-list cols="2" rowHeight="200px">
 
-      <mat-grid-tile *ngFor="let dish of dishes" [routerLink]="['/dishdetail', dish.id]">
+      <mat-grid-tile *ngFor="let dish of dishes" [routerLink]="['/dishdetail', dish.id]" appHighlight>
 
             <!-- use BaseURL too get the image: -->
             <img height="200px" src="{{BaseURL + dish.image}}" alt="{{dish.name}}">

@@ -1,14 +1,15 @@
-import { Component, OnInit, Inject} from '@angular/core';
+import { Component, OnInit, Inject, ViewChild} from '@angular/core';
 
 import { Dish } from '../shared/dish';
 import { DishService } from '../services/dish.service';
 import { Params, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Comment } from '../shared/comment';
 
 // import switchMap:
 import { switchMap } from 'rxjs/operators';
-import { Review } from '../shared/review';
+
 
 @Component({
   selector: 'app-dishdetail',
@@ -22,7 +23,11 @@ import { Review } from '../shared/review';
 export class DishdetailComponent implements OnInit {
 
   commentForm : FormGroup;
-  review: Review;
+  // add variable comment which type is Comment array:
+  comment: Comment;
+  @ViewChild('cform') commentFormDirective;
+
+  dishcopy: Dish;
 
   dish: Dish;
   // create a new variables for take id and prev and next:
@@ -34,17 +39,16 @@ export class DishdetailComponent implements OnInit {
 
    // add objects for formError:
    formErrors = {
-    'name': '',
-    'rating': '',
+    'author': '',
     'comment': '',
   };
 
     // add custom validations:
     validationMessages = {
-      'name': {
+      'author': {
         'required': 'Name is required.',
         'minlength': 'Name must be at least 2 characters long.',
-        'maxlength': 'Name cannot be more than 25 characters long.'
+
       },
       'comment': {
         'required': 'comment is required.',
@@ -55,16 +59,15 @@ export class DishdetailComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private formbuilder: FormBuilder,
-    @Inject ('BaseURL') private BaseURL) { 
+    @Inject ('BaseURL') private BaseURL) { }
 
-      this.createForm();
-    }
-
+    
   ngOnInit() {
+    this.createForm();
     // method for when the dishes are changed then show them:
     // and get all the dishes in dishdetaile component:
     this.route.params.pipe(switchMap((params: Params) => this.dishservice.getDish(params['id'])))
-    .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); },
+    .subscribe(dish => { this.dish = dish; this.dishcopy = dish; this.setPrevNext(dish.id); },
       errmess => this.errMess =<any>errmess);
 
     // use this method too get the id of dishes:
@@ -75,16 +78,29 @@ export class DishdetailComponent implements OnInit {
 
   // add method too submit the comment:
   onSubmit() {
-    this.review = this.commentForm.value;
-    console.log(this.review);
+    this.comment =this.commentForm.value;
+    this.comment.date =new Date().toISOString();
+    console.log(this.comment);
+    // push the data into the comment array on server using push method:
+    this.dishcopy.comments.push(this.comment);
+    this.dishservice.putDish(this.dishcopy)
+    .subscribe(dish => {
+      this.dish = dish; this.dishcopy = dish;
+    },
+    errmess => { this.dish =null; this.dishcopy =null; this.errMess =<any>errmess});
+    // this.commentFormDirective.resetForm();
     // when the form is submitted then filled data will be reset:
-    this.commentForm.reset();
+    this.commentForm.reset({
+      author: '',
+      rating: 5,
+      comment: ''
+    });
   }
 
   // below the ngOnInit add method:
   createForm(){
     this.commentForm =this.formbuilder.group({
-      name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
+      author: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
       rating: 5,
       comment: ['', [Validators.required]],
     });

@@ -50,6 +50,14 @@
         </p>
         
       </mat-list-item>
+      <!-- add comment into the comment on server: -->
+      <!-- <mat-list-item *ngFor="let comments of dish.comments">
+        <p matLine> -- {{comments.author}}</p>
+        <br/>
+        <p matLine>{{comments.rating}} Stars</p>
+        <br/>
+        <p matLine>{{comments.comment}}</p>
+      </mat-list-item> -->
     </mat-list>
     
     <div class="form-size">
@@ -57,7 +65,7 @@
       
       <form novalidate [formGroup]="commentForm" (ngSubmit)="onSubmit()">
         <mat-form-field class="half-width">
-          <input matInput formControlName="name" placeholder="Name" type="text" required>
+          <input matInput formControlName="author" placeholder="Name" type="text" required>
           <mat-error *ngIf="formErrors.name">{{formErrors.name}}</mat-error>
         </mat-form-field>
 
