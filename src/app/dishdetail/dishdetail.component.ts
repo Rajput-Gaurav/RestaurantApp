@@ -10,14 +10,30 @@ import { Comment } from '../shared/comment';
 // import switchMap:
 import { switchMap } from 'rxjs/operators';
 
+// add the following for animations:
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
+
+// Define a new animation trigger within the Component decorator:
 @Component({
   selector: 'app-dishdetail',
   templateUrl: './dishdetail.component.html',
   // add scss file:
-  styleUrls: ['./dishdetail.component.scss']
+  styleUrls: ['./dishdetail.component.scss'],
 
-  
+  animations: [
+    trigger('visibility', [
+        state('shown', style({
+            transform: 'scale(1.0)',
+            opacity: 1
+        })),
+        state('hidden', style({
+            transform: 'scale(0.5)',
+            opacity: 0
+        })),
+        transition('* => *', animate('0.5s ease-in-out'))
+    ])
+  ],
 })
 
 export class DishdetailComponent implements OnInit {
@@ -36,6 +52,8 @@ export class DishdetailComponent implements OnInit {
   next: string;
 
   errMess: string;
+
+  visibility = 'shown';
 
    // add objects for formError:
    formErrors = {
@@ -66,8 +84,8 @@ export class DishdetailComponent implements OnInit {
     this.createForm();
     // method for when the dishes are changed then show them:
     // and get all the dishes in dishdetaile component:
-    this.route.params.pipe(switchMap((params: Params) => this.dishservice.getDish(params['id'])))
-    .subscribe(dish => { this.dish = dish; this.dishcopy = dish; this.setPrevNext(dish.id); },
+    this.route.params.pipe(switchMap((params: Params) => { this.visibility = 'hidden'; return this.dishservice.getDish(+params['id']); }))
+    .subscribe(dish => { this.dish = dish; this.dishcopy = dish; this.setPrevNext(dish.id); this.visibility= 'shown'; },
       errmess => this.errMess =<any>errmess);
 
     // use this method too get the id of dishes:
