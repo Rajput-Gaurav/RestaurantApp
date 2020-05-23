@@ -66,7 +66,8 @@ import { HighlightDirective } from './directives/highlight.directive';
     AboutComponent,
     ContactComponent,
     LoginComponent,
-    HighlightDirective
+    HighlightDirective,
+    
   ],
   imports: [
     BrowserModule,

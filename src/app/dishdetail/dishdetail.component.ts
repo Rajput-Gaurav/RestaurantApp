@@ -10,9 +10,8 @@ import { Comment } from '../shared/comment';
 // import switchMap:
 import { switchMap } from 'rxjs/operators';
 
-// add the following for animations:
-import { trigger, state, style, animate, transition } from '@angular/animations';
-
+// import animation class:
+import { visibility, flyInOut, expand } from '../animations/app.animation';
 
 // Define a new animation trigger within the Component decorator:
 @Component({
@@ -21,19 +20,12 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   // add scss file:
   styleUrls: ['./dishdetail.component.scss'],
 
-  animations: [
-    trigger('visibility', [
-        state('shown', style({
-            transform: 'scale(1.0)',
-            opacity: 1
-        })),
-        state('hidden', style({
-            transform: 'scale(0.5)',
-            opacity: 0
-        })),
-        transition('* => *', animate('0.5s ease-in-out'))
-    ])
-  ],
+  host:  {
+          '[@flyInOut]': 'true',
+          'style': 'display: block;'
+        },
+  animations: [ visibility(), flyInOut(), expand() ],
+
 })
 
 export class DishdetailComponent implements OnInit {
