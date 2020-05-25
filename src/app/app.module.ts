@@ -43,6 +43,7 @@ import { DishService} from './services/dish.service';
 import { PromotionService} from './services/promotion.service';
 import { LeaderService } from './services/leader.service';
 import { ProcessHttpmsgService } from './services/process-httpmsg.service';
+import { FeedbackService } from './services/feedback.service';
 
 // add approutingmodule:
 import { AppRoutingModule} from './app-routing/app-routing.module';
@@ -106,6 +107,7 @@ import { HighlightDirective } from './directives/highlight.directive';
     PromotionService,
     LeaderService,
     ProcessHttpmsgService,
+    FeedbackService,
     {provide: 'BaseURL', useValue: baseURL}
   ],
 

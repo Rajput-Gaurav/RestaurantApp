@@ -35,8 +35,21 @@
   </div>
 
   <!-- contact form: -->
-  
+ 
   <div fxFlex fxFlexOffset="20px" class="form-size">
+
+    <!-- show the data when form is submitting too the server: -->
+    <div *ngIf="feedbacks" [@expand]>
+      <h1>Your Data is submitted: </h1>
+      <p>{{feedbacks.firstname}}</p>
+      <p>{{feedbacks.lastname}}</p>
+      <p>{{feedbacks.telnum}}</p>
+      <p>{{feedbacks.email}}</p>
+      <p>{{feedbacks.agree}}</p>
+      <p>{{feedbacks.contacttype}}</p>
+      <p>{{feedbacks.message}}</p>
+    </div>
+
     <h3>Send us your Feedback</h3>
     <p>{{ feedbackForm.value | json }} {{ feedbackForm.status | json }}</p>
 

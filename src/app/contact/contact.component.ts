@@ -1,10 +1,12 @@
 // import viewchild from angular/core:
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Feedback, ContactType } from '../shared/feedback';
 
 import { flyInOut, expand } from '../animations/app.animation';
+
+import { FeedbackService } from '../services/feedback.service';
 
 @Component({
   selector: 'app-contact',
@@ -21,8 +23,12 @@ import { flyInOut, expand } from '../animations/app.animation';
 export class ContactComponent implements OnInit {
 
   feedbackForm: FormGroup;
-  feedback: Feedback;
+  feedbacks: Feedback;
+
+  feedback : FeedbackService;
+  feedbackcopy: FeedbackService;
   contactType = ContactType;
+  errMess :string;
   // use viewchild too access the form template:
   @ViewChild('fform') feedbackFormDirective;
 
@@ -56,7 +62,8 @@ export class ContactComponent implements OnInit {
     },
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private feedbackService :FeedbackService,) {
     this.createForm();
   }
 
@@ -106,8 +113,21 @@ export class ContactComponent implements OnInit {
 
   // method too submit the form:
   onSubmit() {
-    this.feedback = this.feedbackForm.value;
-    console.log(this.feedback);
+    this.feedbacks = this.feedbackForm.value;
+    console.log(this.feedbacks);
+
+    // method too push the data too the server:
+    this.feedbackService.postfeedback(this.feedbacks)
+    .subscribe(
+      data => console.log('Success', data),
+      errmess => console.log('Error', errmess)
+    )
+
+    // method too get the data through server:
+    this.feedbackService.getfeedback()
+    .subscribe(feedbacks => this.feedbacks = feedbacks,
+      errmess => this.errMess =<any>errmess);
+      
     // when the form is submitted then filled data will be reset:
     this.feedbackForm.reset();
 

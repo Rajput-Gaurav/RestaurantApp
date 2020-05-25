@@ -20,15 +20,16 @@ import { flyInOut, expand } from '../animations/app.animation';
 export class AboutComponent implements OnInit {
 
   leader: Leader[];
+  leaderErrMess :string;
 
   constructor(private leaderService: LeaderService) { }
 
   ngOnInit() {
 
-    // use this method too get the data through promises:
     
      this.leaderService.getLeaders()
-    .subscribe(leader => this.leader = leader);
+    .subscribe(leader => this.leader = leader,
+      errmess => this.leaderErrMess =<any>errmess);
   }
 
 }
